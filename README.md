@@ -3,7 +3,7 @@
 **Run**
 
 ```shell
-vite
+npm run dev
 ```
 
 **Build**
