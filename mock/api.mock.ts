@@ -42,6 +42,7 @@ export default defineMock([
                 "------------",
                 "/system/params",
                 "/system/dict",
+                "/system/order",
                 "/system/log/action",
                 "/system/log/login",
                 "/system/manager/users",

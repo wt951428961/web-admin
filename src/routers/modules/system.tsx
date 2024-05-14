@@ -2,20 +2,21 @@ import {
     // BgColorsOutlined,
     // FileDoneOutlined,
     // DesktopOutlined, 
-    FontSizeOutlined,
+    // FontSizeOutlined,
     FundOutlined,
-    FundViewOutlined, GoldOutlined,
-    HddOutlined,
+    // FundViewOutlined, GoldOutlined,
+    // HddOutlined,
     // HighlightOutlined,
     // InfoCircleOutlined,
     SettingOutlined,
-    UnorderedListOutlined,
+    // UnorderedListOutlined,
     UserSwitchOutlined
 } from "@ant-design/icons";
-import lazyLoad from "../lazyLoad";
-import React, {lazy} from "react";
+// import lazyLoad from "../lazyLoad";
+// import React, {lazy} from "react";
 import {MenuRouteObject} from "../router";
-import Page3 from "../../pages/Page3";
+import OrderInfo from "../../pages/OrderInfo";
+import UserInfo from "../../pages/UserInfo";
 // import Error403 from "../../pages/Error403";
 // import Error404 from "../../pages/Error404";
 // import ResultSuccess from "../../pages/ResultSuccess";
@@ -58,60 +59,24 @@ const system: MenuRouteObject = {
         //     ] as MenuRouteObject[]
         // },
         {
-            label: "系统管理",
+            label: "通道账号",
             path: "manager",
             icon: <FundOutlined/>,
             children: [
                 {
                     path: "users",
-                    label: "在线用户",
+                    label: "账号信息",
                     icon: <UserSwitchOutlined/>,
-                    element: <Page3/>
-                },
-                {
-                    path: "server",
-                    label: "服务器信息",
-                    icon: <HddOutlined/>,
-                    element: <Page3/>
-                },
-                {
-                    path: "server1",
-                    label: "服务器信息",
-                    icon: <HddOutlined/>,
-                    element: <Page3/>
-                },
-                {
-                    path: "server2",
-                    label: "服务器信息",
-                    icon: <HddOutlined/>,
-                    element: <Page3/>
-                },
-                {
-                    path: "server3",
-                    label: "服务器信息",
-                    icon: <HddOutlined/>,
-                    element: <Page3/>
-                },
-                {
-                    path: "server4",
-                    label: "服务器信息",
-                    icon: <HddOutlined/>,
-                    element: <Page3/>
-                },
-                {
-                    path: "redis",
-                    label: "Redis信息",
-                    icon: <FundViewOutlined/>,
-                    element: <Page3/>
-                },
-                {
-                    path: "caches",
-                    label: "Redis缓存",
-                    icon: <GoldOutlined/>,
-                    element: <Page3/>
+                    element: <OrderInfo/>
                 },
             ] as MenuRouteObject[]
         },
+        {
+            label: "订单管理",
+            path: "order",
+            icon: <FundOutlined/>,
+            element: <UserInfo/>
+        }
         // {
         //     label: "开发示例",
         //     path: "dev",
