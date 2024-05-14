@@ -3,9 +3,11 @@ import {App as AntdApp, Button, Checkbox, Form, Input} from "antd";
 import styles from "./login.module.scss";
 import {useDispatch} from "react-redux";
 import {login} from "../../store/slices/authSlice";
+import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import {useLoginMutation} from "../../apis/accountApi";
 import {LockOutlined, UserOutlined} from "@ant-design/icons";
+// import { esbuildVersion } from "vite";
 
 const Login: React.FC = () => {
 
@@ -16,23 +18,18 @@ const Login: React.FC = () => {
     const [loginFn, {isLoading}] = useLoginMutation();
     const {message, notification, modal} = AntdApp.useApp();
     const handlerSubmit = async (values: any) => {
-        loginFn({
-            account: values.username,
-            password: values.password
-        }).unwrap().then(data => {
-            if (data.errorCode == 0) {
+        axios.post('/api/goto',{Suser:values.username, Spass:values.password}).then((res:any)=>{
+            if (res.status === 200 && res.data.code === '1001'){
                 dispatch(login({
-                    jwt: data.jwt
+                    jwt: res.data.data[0].Device_Key
                 }))
-                message.success("登录成功")
-                // todo...
-                navigate("/system/manager/users")
-            } else {
+                message.success("登录成功");
+                navigate("/system/manager/users");
+            }else{
                 notification.error({
-                    description: data.message,
+                    description: '请重新输入账号密码！',
                     message: '出错了'
                 });
-
                 form.resetFields();
             }
         })
@@ -64,12 +61,11 @@ const Login: React.FC = () => {
                 }}
             >
 
-                <h1 style={{marginBottom: '30px'}}>后台管理系统</h1>
+                <h1 style={{marginBottom: '30px'}}>管理系统</h1>
 
                 <Form.Item
                     name="username"
                     rules={[{required: true, message: '账户不能为空'}]}
-                    extra="测试账号 admin，密码 123456"
                 >
                     <Input prefix={<UserOutlined className="site-form-item-icon"/>} placeholder="账户"/>
                 </Form.Item>
@@ -99,7 +95,7 @@ const Login: React.FC = () => {
                     <Button type="primary" htmlType="submit" className="login-form-button" block loading={isLoading}>
                         登 录
                     </Button>
-                    或者 <Button type={"link"} onClick={showModal}>注册</Button>
+                    {/* 或者 <Button type={"link"} onClick={showModal}>注册</Button> */}
                 </Form.Item>
             </Form>
         </div>
