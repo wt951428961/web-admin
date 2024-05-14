@@ -1,5 +1,5 @@
 import React from "react";
-import {App as AntdApp, Button, Checkbox, Form, Input} from "antd";
+import {App as AntdApp, Button, Form, Input} from "antd";
 import styles from "./login.module.scss";
 import {useDispatch} from "react-redux";
 import {login} from "../../store/slices/authSlice";
@@ -21,7 +21,8 @@ const Login: React.FC = () => {
         axios.post('/api/goto',{Suser:values.username, Spass:values.password}).then((res:any)=>{
             if (res.status === 200 && res.data.code === '1001'){
                 dispatch(login({
-                    jwt: res.data.data[0].Device_Key
+                    jwt: res.data.data[0].Device_Key,
+                    device_sid: res.data.data[0].Device_Sid
                 }))
                 message.success("登录成功");
                 navigate("/system/manager/users");
@@ -34,13 +35,6 @@ const Login: React.FC = () => {
             }
         })
     };
-
-    const showModal = () => {
-        modal.success({
-            title: '诶呀',
-            content: '这个只是一个示例而已，需自己实现一下...',
-        })
-    }
 
     return (
         <div className={styles.container}>

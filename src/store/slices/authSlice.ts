@@ -4,7 +4,8 @@ import type {AppState} from "../store";
 // Define a type for the slices state
 export interface AccountState {
     isLogin?: boolean,
-    jwt: any
+    device_sid:string,
+    jwt: any,
 }
 
 
@@ -15,30 +16,33 @@ export const authSlice = createSlice({
         if (jwt) {
             return {
                 isLogin: true,
-                jwt: jwt
+                deviceSid:"",
+                jwt: jwt,
             }
         } else {
             return {
                 isLogin: false,
+                deviceSid:"",
                 jwt: null
             }
         }
-
     },
     reducers: {
         login: (state, action: PayloadAction<AccountState>) => {
             state.isLogin = true;
             state.jwt = action.payload.jwt;
+            state.deviceSid = action.payload.device_sid;
             localStorage.setItem("jwt", action.payload.jwt);
         },
         loggedOut: (state) => {
             state.isLogin = false;
             state.jwt = '';
             localStorage.removeItem("jwt");
-        },
+        }
     }
 })
 
 export const {login,loggedOut} = authSlice.actions
-export const selectLogin = (state: AppState) => state.auth.isLogin
+export const selectLogin = (state: AppState) => state.auth.isLogin;
+export const selectDeviceSid = (state: AppState) => state.auth.deviceSid;
 export default authSlice.reducer

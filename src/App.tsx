@@ -17,11 +17,11 @@ dayjs.locale('zh');
 function App() {
 
     const [lang, setLang] = useState<Locale>(zhCN);
-
     const settings = {
         setLocale: (locale: Locale) => {
             setLang(locale)
-        }
+        },
+        deviceSid:''
     };
 
     const store = setupStore();

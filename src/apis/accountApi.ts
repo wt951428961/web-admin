@@ -9,7 +9,7 @@ export const accountApi = createApi({
     tagTypes: [],
     reducerPath:"accountApi",
     endpoints: (builder) => ({
-        login: builder.mutation<ResponseData & { jwt: string }, { account: string, password: string }>({
+        login: builder.mutation<ResponseData & { jwt: string, device_sid:any }, { account: string, password: string }>({
             query: (body) => ({
                 url: "login",
                 method: 'POST',

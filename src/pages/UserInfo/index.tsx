@@ -1,4 +1,6 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import { useSelector } from "react-redux";
+import { selectDeviceSid } from "../../store/slices/authSlice";
 import axios from 'axios';
 import {
     // ColumnHeightOutlined, 
@@ -125,6 +127,8 @@ const AdvancedSearchForm = () => {
 };
 
 const UserInfo: React.FC = () => {
+    const getInfo = useSelector(selectDeviceSid);
+    console.log(getInfo);
     const dataSource = [
         {
             key: '1',
@@ -174,8 +178,11 @@ const UserInfo: React.FC = () => {
         },
     ];
 
-
     const [isModalOpen, setIsModalOpen] = useState(false);
+
+    useEffect(()=>{
+
+    },[])
 
     return (
         <div>

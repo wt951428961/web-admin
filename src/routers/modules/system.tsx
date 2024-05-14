@@ -67,7 +67,7 @@ const system: MenuRouteObject = {
                     path: "users",
                     label: "账号信息",
                     icon: <UserSwitchOutlined/>,
-                    element: <OrderInfo/>
+                    element: <UserInfo/>
                 },
             ] as MenuRouteObject[]
         },
@@ -75,7 +75,7 @@ const system: MenuRouteObject = {
             label: "订单管理",
             path: "order",
             icon: <FundOutlined/>,
-            element: <UserInfo/>
+            element: <OrderInfo/>
         }
         // {
         //     label: "开发示例",
