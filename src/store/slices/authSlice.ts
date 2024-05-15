@@ -33,11 +33,14 @@ export const authSlice = createSlice({
             state.jwt = action.payload.jwt;
             state.deviceSid = action.payload.device_sid;
             localStorage.setItem("jwt", action.payload.jwt);
+            localStorage.setItem('device_sid', action.payload.device_sid);
         },
         loggedOut: (state) => {
             state.isLogin = false;
             state.jwt = '';
+            state.deviceSid = '';
             localStorage.removeItem("jwt");
+            localStorage.removeItem("device_sid");
         }
     }
 })
