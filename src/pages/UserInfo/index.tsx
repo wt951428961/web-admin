@@ -269,11 +269,12 @@ const UserInfo: React.FC = () => {
             dataIndex: 'name',
             key: 'name',
             fixed: 'right',
-            width: 350,
+            width: 450,
             render: (_: any, record: any) => {
                 return (
                     <Space>
                         <a onClick={()=>createOrder(record)}><EditOutlined/>生成订单</a>
+                        <a onClick={()=>copyOrder(record)}><EditOutlined/>复制链接</a>
                         <a style={{color: "#ed4014"}} onClick={()=>deleteOrder(record)}><DeleteOutlined/> 删除账号</a>
                         <a style={{color: "#ed4014"}} onClick={()=>dangerUseOrder(record)}><EyeOutlined/> 危险复用</a>
                         <a onClick={()=>usingOrder(record)}><UploadOutlined/> 停用启用</a>
@@ -350,6 +351,37 @@ const UserInfo: React.FC = () => {
                 message.success(`${data.data.msg}`);
             }
         })
+    }
+    // 复制链接
+    const copyOrder = (rows:any)=>{
+        let copyResult = true
+        const text = rows.Device_CmUrl || '让我们一起快乐的敲代码吧~';
+        if (!!window.navigator.clipboard) {
+            window.navigator.clipboard.writeText(text).then((res) => {
+                message.success('复制成功！');
+                return copyResult;
+            }).catch((err) => {
+                copyResult = false
+                message.error('复制失败');
+                return copyResult;
+            })
+          } else {
+            let inputDom = document.createElement('textarea');
+            inputDom.setAttribute('readonly', 'readonly');
+            inputDom.value = text;
+            document.body.appendChild(inputDom);
+            inputDom.select();
+            const result = document.execCommand('copy')
+            if (result) {
+                message.success('复制成功！');
+              
+            } else {
+                message.error('复制失败');
+                copyResult = false
+            }
+            document.body.removeChild(inputDom);
+            return copyResult;
+          }
     }
 
     return (
