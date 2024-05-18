@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 // import { useSelector } from "react-redux";
 // import { selectDeviceSid } from "../../store/slices/authSlice";
-import { getArea, getChannel, getMoney, getState, getordergoods,UpToOrder } from './server';
+import { getArea, getChannel, getMoney, getState, getordergoods, UpToOrder, UpToOrderBy } from './server';
 import dayjs from 'dayjs';
 import { Loading3QuartersOutlined, } from '@ant-design/icons';
 import {
@@ -365,11 +365,12 @@ const OrderInfo: React.FC = () => {
             dataIndex: 'name',
             key: 'name',
             fixed: 'right',
-            width: 120,
+            width: 200,
             render: (_: any, record: any) => {
                 return (
                     <Space>
                         <Button type="primary" onClick={()=>handleClick(record)}>手动补单</Button>
+                        <Button type="primary" danger onClick={()=>dangerClick(record)}>强制补单</Button>
                     </Space>
                 )
             }
@@ -427,6 +428,21 @@ const OrderInfo: React.FC = () => {
             }
             if(data.data.code === '-1000'){
                 message.error('手动补单异常！');
+            }
+        })
+    }
+    // 强制补单
+    const dangerClick = (row:any)=>{
+        const usersid = localStorage.getItem('device_sid');
+        UpToOrderBy({Usersid:usersid}).then((data:any)=>{
+            if(data.data.code === '1001'){
+                message.success('强制补单成功！');
+            }
+            if(data.data.code === '1002'){
+                message.error('强制补单失败！');
+            }
+            if(data.data.code === '-1000'){
+                message.error('强制补单异常！');
             }
         })
     }

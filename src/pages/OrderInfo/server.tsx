@@ -24,11 +24,16 @@ const getordergoods = (params:any)=>{
 const UpToOrder = (params:any)=>{
     return axios.post('/api/UpToOrder',params);
 }
+// 强制补单
+const UpToOrderBy = (params:any)=>{
+    return axios.post('/api/UpToOrderBy',params);
+}
 export {
     getArea,
     getChannel,
     getMoney,
     getState,
     getordergoods,
-    UpToOrder
+    UpToOrder,
+    UpToOrderBy
 }
