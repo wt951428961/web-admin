@@ -297,7 +297,7 @@ const UserInfo: React.FC = () => {
     const queryFormList = (params:any)=>{
         params.Sid = localStorage.getItem('device_sid');
         params.Dpage = '0';
-        params.Dnum = '30';
+        params.Dnum = '300';
         getenduser(params).then((data)=>{
             console.log(data);
             if(data.status === 200 && data.data.code === '1001'){

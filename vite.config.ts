@@ -15,7 +15,7 @@ export default defineConfig({
             //     target: '',
             // },
             '^/api':{
-                target: 'http://8.149.132.162'
+                target: 'http://8.149.132.162:7162'
             }
         },
     },
