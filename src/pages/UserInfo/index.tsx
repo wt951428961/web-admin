@@ -64,10 +64,8 @@ const AdvancedSearchForm = (props:{queryForm:any}) => {
                         ]}
                     >
                         <Select>
-                            <Option value="1">1</Option>
-                            <Option value="2">
-                                2
-                            </Option>
+                            <Option value="0" key="0">启用</Option>
+                            <Option value="1" key="1">停用</Option>
                         </Select>
                     </Form.Item>    
                 </Col>

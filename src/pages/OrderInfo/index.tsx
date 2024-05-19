@@ -418,8 +418,7 @@ const OrderInfo: React.FC = () => {
     
     // 手动补单
     const handleClick = (row:any)=>{
-        const usersid = localStorage.getItem('device_sid');
-        UpToOrder({Usersid:usersid}).then((data:any)=>{
+        UpToOrder({Usersid:row.Device_Area}).then((data:any)=>{
             if(data.data.code === '1001'){
                 message.success('手动补单成功！');
             }
@@ -433,8 +432,7 @@ const OrderInfo: React.FC = () => {
     }
     // 强制补单
     const dangerClick = (row:any)=>{
-        const usersid = localStorage.getItem('device_sid');
-        UpToOrderBy({Usersid:usersid}).then((data:any)=>{
+        UpToOrderBy({Usersid:row.Device_Area}).then((data:any)=>{
             if(data.data.code === '1001'){
                 message.success('强制补单成功！');
             }
